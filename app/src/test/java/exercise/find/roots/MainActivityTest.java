@@ -45,10 +45,45 @@ public class MainActivityTest extends TestCase {
     EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
     Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
 
+    inputEditText.setText("155552");
+    assertTrue(button.isEnabled());
+
+
+
+
     // test: insert input to the edit text and verify that the button is enabled
     // TODO: implement
   }
 
+
+
+  @Test
+  public void when_clickingCalculate_then_calculateButtonIsDisable(){
+    // create a MainActivity and let it think it's currently displayed on the screen
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    // test: make sure that the "input" edit-text has no text
+    EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
+    Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
+    inputEditText.setText("155552");
+    button.performClick();
+
+
+    assertFalse(button.isEnabled());
+  }
+  @Test
+  public void when_putIllegalInput_then_the_calculateButtonIsDisable(){
+    // create a MainActivity and let it think it's currently displayed on the screen
+    MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class).create().visible().get();
+
+    // find the edit-text and the button
+    EditText inputEditText = mainActivity.findViewById(R.id.editTextInputNumber);
+    Button button = mainActivity.findViewById(R.id.buttonCalculateRoots);
+
+    inputEditText.setText("fffff");
+    assertFalse(button.isEnabled());
+
+  }
   // TODO: add 1 or 2 more unit tests to the activity. so your "writing tests" skill won't get rusty.
   //  possible flows to unit-test:
   //  - when activity launches, "progress" starts hidden
